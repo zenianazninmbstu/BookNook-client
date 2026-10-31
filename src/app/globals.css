@@ -24,3 +24,44 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+/* BookNook Hero Slider */
+
+.booknook-hero .swiper-pagination {
+  bottom: 24px !important;
+}
+
+.booknook-hero .swiper-pagination-bullet {
+  width: 9px;
+  height: 9px;
+  background: #B9DCCB;
+  opacity: 0.45;
+  transition: all 0.3s ease;
+}
+
+.booknook-hero .swiper-pagination-bullet-active {
+  width: 26px;
+  border-radius: 20px;
+  opacity: 1;
+}
+
+.booknook-hero .swiper-button-next,
+.booknook-hero .swiper-button-prev {
+  color: #B9DCCB;
+  transform: scale(0.7);
+  transition: opacity 0.3s ease;
+}
+
+.booknook-hero .swiper-button-next:hover,
+.booknook-hero .swiper-button-prev:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+  .booknook-hero .swiper-button-next,
+  .booknook-hero .swiper-button-prev {
+    display: none;
+  }
+}
