@@ -9,6 +9,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+import NewArrivals from "@/components/NewArrivals";
+import HowBorrowingWorks from "@/components/HowBorrowingWorks";
+import ReaderReviews from "@/components/ReaderReviews";
+
 const slides = [
   {
     description:
@@ -123,6 +127,12 @@ export default function Home() {
           ))}
         </Swiper>
       </section>
+
+      <NewArrivals />
+
+      <HowBorrowingWorks />
+
+      <ReaderReviews />
     </main>
   );
 }
