@@ -2,6 +2,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { API_BASE, type Book } from "@/lib/api";
+import type { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "BookNook | All Books",
+  description: "Explore all books available in the BookNook library.",
+};
+
 
 async function getBooks(): Promise<Book[]> {
   try {

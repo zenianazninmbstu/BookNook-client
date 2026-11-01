@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
 
+
+
+
 interface Book {
   _id: string;
   title: string;
@@ -23,8 +26,14 @@ const API_URL =
 const categories = ["Fiction", "Science", "History", "Kids", "Others"];
 
 export default function MyBooksPage() {
+
+ useEffect(() => {
+  console.log("My Books title effect running");
+  document.title = "BookNook | My Books";
+}, []);
+
   const router = useRouter();
-  const { data: session, isPending } = authClient.useSession();
+ const { data: session, isPending } = authClient.useSession();
 
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
