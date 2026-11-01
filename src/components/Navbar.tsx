@@ -8,7 +8,7 @@ import { authClient } from "@/lib/auth-client";
 
 const publicLinks = [
   { name: "Home", href: "/" },
-  { name: "All Books", href: "/books" },
+ { name: "All Books", href: "/books" },
 ];
 
 const privateLinks = [
