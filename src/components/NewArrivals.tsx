@@ -15,7 +15,7 @@ export default function NewArrivals() {
 
     async function fetchLatestBooks() {
       try {
-        const res = await fetch(`${API_BASE}/books/latest`);
+        const res = await fetch(`${API_BASE}/books?sort=newest&limit=10`);
 
         if (!res.ok) {
           throw new Error("Failed to load books");
