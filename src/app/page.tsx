@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
@@ -38,6 +39,10 @@ const slides = [
 ];
 
 export default function Home() {
+  useEffect(() => {
+    document.title = "BookNook | Home";
+  }, []);
+
   return (
     <main className="w-full overflow-hidden bg-[#081810]">
       <section className="booknook-hero w-full">

@@ -6,6 +6,13 @@ import { headers } from "next/headers";
 import { API_BASE, type Book } from "@/lib/api";
 import { auth } from "@/lib/auth";
 import BorrowButton from "@/components/BorrowButton";
+import type { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "BookNook | Book Details",
+  description: "Explore book details in the BookNook library.",
+};
 
 interface BookDetails extends Book {
   description?: string;

@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 
@@ -11,6 +11,9 @@ const API_URL =
 const categories = ["Fiction", "Science", "History", "Kids", "Others"];
 
 export default function AddBookPage() {
+  useEffect(() => {
+  document.title = "BookNook | Add Book";
+}, []);
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
 

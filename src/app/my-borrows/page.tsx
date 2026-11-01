@@ -19,6 +19,9 @@ const API_URL =
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5000";
 
 export default function MyBorrowsPage() {
+  useEffect(() => {
+  document.title = "BookNook | My Borrows";
+}, []);
   const { data: session, isPending } = authClient.useSession();
 
   const [borrows, setBorrows] = useState<Borrow[]>([]);

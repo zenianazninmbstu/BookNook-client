@@ -1,12 +1,15 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 
 export default function RegisterPage() {
+  useEffect(() => {
+  document.title = "BookNook | Register";
+}, []);
   const router = useRouter();
 
   const [name, setName] = useState("");
