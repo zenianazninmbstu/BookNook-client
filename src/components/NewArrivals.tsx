@@ -2,9 +2,35 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import { API_BASE, type Book } from "@/lib/api";
+
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut" as const,
+    },
+  },
+};
 
 export default function NewArrivals() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -79,9 +105,15 @@ export default function NewArrivals() {
             Fresh On The Shelf
           </p>
 
-        <h2 className="mt-3 font-[var(--font-playfair)] text-[32px] font-bold tracking-tight text-[#F8F5EE] sm:text-4xl md:text-[44px] lg:text-5xl">
+<motion.h2
+  initial={{ opacity: 0, y: 25 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.5 }}
+  transition={{ duration: 0.9, ease: "easeOut" }}
+  className="mt-3 font-[var(--font-playfair)] text-[32px] font-bold tracking-tight text-[#F8F5EE] sm:text-4xl md:text-[44px] lg:text-5xl"
+>
   New Arrivals
-</h2>
+</motion.h2>
 
           <p className="mx-auto mt-4 max-w-xl font-[var(--font-playfair)] text-sm text-[#B9DCCB] sm:text-base md:text-lg">
             The latest books added by our readers.
@@ -90,25 +122,26 @@ export default function NewArrivals() {
           <div className="mx-auto mt-5 h-[3px] w-16 rounded-full bg-[#B9DCCB]" />
         </div>
 
-        {/* Loading Skeleton */}
-        {loading && (
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div
-                key={index}
-                className="animate-pulse overflow-hidden rounded-xl border border-[#B9DCCB]/25 bg-[#0C1C15]"
-              >
-                <div className="aspect-[3/4] w-full bg-[#B9DCCB]/10" />
-                <div className="space-y-3 p-3">
-                  <div className="h-2 w-1/2 rounded bg-[#B9DCCB]/10" />
-                  <div className="h-3 w-3/4 rounded bg-[#B9DCCB]/10" />
-                  <div className="h-2 w-2/3 rounded bg-[#B9DCCB]/10" />
-                  <div className="h-8 w-full rounded-full bg-[#B9DCCB]/10" />
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+      {/* Loading Skeleton */}
+{loading && (
+  <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+    {Array.from({ length: 6 }).map((_, index) => (
+      <div
+        key={index}
+        className="animate-pulse overflow-hidden rounded-xl border border-[#B9DCCB]/25 bg-[#0C1C15]"
+      >
+        <div className="aspect-[3/4] w-full bg-[#B9DCCB]/10" />
+
+        <div className="space-y-3 p-3">
+          <div className="h-2 w-1/2 rounded bg-[#B9DCCB]/10" />
+          <div className="h-3 w-3/4 rounded bg-[#B9DCCB]/10" />
+          <div className="h-2 w-2/3 rounded bg-[#B9DCCB]/10" />
+          <div className="h-8 w-full rounded-full bg-[#B9DCCB]/10" />
+        </div>
+      </div>
+    ))}
+  </div>
+)}
 
         {/* Error State */}
         {!loading && error && (
@@ -126,61 +159,70 @@ export default function NewArrivals() {
 
         {/* Book Cards */}
         {!loading && !error && books.length > 0 && (
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {books.map((book) => (
-              <article
-                key={book._id}
-                className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-[#B9DCCB]/25 bg-gradient-to-b from-[#10251A] to-[#091B12] shadow-md transition-all duration-300 hover:-translate-y-2 hover:border-[#B9DCCB]/60 hover:shadow-xl hover:shadow-[#B9DCCB]/10"
-              >
-                {/* Cover Image */}
-                <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#10231A]">
-                  {book.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={book.image}
-                      alt={book.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.4"
-                        className="h-12 w-12 text-[#B9DCCB]/40"
-                      >
-                        <path d="M12 7v14m0-14C9 4 5 4 2 5v14c4-1 7-1 10 2m0-14c3-3 7-3 10-2v14c-4-1-7-1-10 2" />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-
-                {/* Book Information */}
-                <div className="flex flex-1 flex-col p-3">
-                  <p className="text-[10px] font-medium uppercase tracking-wider text-[#91B5A0]">
-                    {book.category}
-                  </p>
-
-                  <h3 className="mt-2 min-h-10 line-clamp-2 font-[var(--font-playfair)] text-xs font-semibold leading-snug text-[#F5F1E8] sm:text-[13px]">
-                    {book.title}
-                  </h3>
-
-                  <p className="mt-2 line-clamp-1 text-[10px] text-[#AAB9AD] sm:text-[11px]">
-                    by {book.author}
-                  </p>
-
-                  {/* View Details */}
-                  <Link
-                    href={`/books/${book._id}`}
-                    className="mt-auto block w-full rounded-full bg-[#B9DCCB] px-4 py-2 text-center text-[11px] font-semibold tracking-wide text-[#0C1C15] shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#E7F1EA] sm:text-xs"
-                  >
-                    View Details
-                  </Link>
-                </div>
-              </article>
-            ))}
+       
+<motion.div
+  variants={containerVariants}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.1 }}
+  className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-6"
+>
+  {books.map((book) => (
+    <motion.article
+      key={book._id}
+      variants={cardVariants}
+      className="card group flex min-w-0 flex-col overflow-hidden rounded-xl border border-[#B9DCCB]/25 bg-gradient-to-b from-[#10251A] to-[#091B12] shadow-md transition-all duration-300 hover:-translate-y-2 hover:border-[#B9DCCB]/60 hover:shadow-xl hover:shadow-[#B9DCCB]/10"
+    >
+      {/* Cover Image */}
+      <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#10231A]">
+        {book.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={book.image}
+            alt={book.title}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              className="h-12 w-12 text-[#B9DCCB]/40"
+            >
+              <path d="M12 7v14m0-14C9 4 5 4 2 5v14c4-1 7-1 10 2m0-14c3-3 7-3 10-2v14c-4-1-7-1-10 2" />
+            </svg>
           </div>
+        )}
+      </div>
+
+      {/* Book Information */}
+      <div className="flex flex-1 flex-col p-3">
+        <p className="text-[10px] font-medium uppercase tracking-wider text-[#91B5A0]">
+          {book.category}
+        </p>
+
+        <h3 className="mt-2 min-h-10 line-clamp-2 font-[var(--font-playfair)] text-xs font-semibold leading-snug text-[#F5F1E8] sm:text-[13px]">
+          {book.title}
+        </h3>
+
+        <p className="mt-2 line-clamp-1 text-[10px] text-[#AAB9AD] sm:text-[11px]">
+          by {book.author}
+        </p>
+
+        {/* View Details */}
+        <Link
+          href={`/books/${book._id}`}
+          className="mt-auto block w-full rounded-full bg-[#B9DCCB] px-4 py-2 text-center text-[11px] font-semibold tracking-wide text-[#0C1C15] shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#E7F1EA] sm:text-xs"
+        >
+          View Details
+        </Link>
+      </div>
+    </motion.article>
+  ))}
+</motion.div>
+
         )}
 
         {/* See All Books */}
@@ -189,7 +231,7 @@ export default function NewArrivals() {
 
           <Link
             href="/books"
-            className="inline-flex shrink-0 items-center gap-3 rounded-full bg-[#B9DCCB] px-4 py-2 text-[11px] font-semibold tracking-wide text-[#0C1C15] shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#E7F1EA] sm:text-xs"
+            className="btn btn-sm h-auto min-h-0 shrink-0 gap-3 rounded-full border-0 bg-[#B9DCCB] px-4 py-2 text-[11px] font-semibold tracking-wide text-[#0C1C15] shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#E7F1EA] sm:text-xs"
           >
             See All Books
             <span aria-hidden="true" className="text-lg">→</span>

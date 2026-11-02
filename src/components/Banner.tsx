@@ -2,8 +2,11 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -34,10 +37,12 @@ const slides = [
 ];
 
 export default function Banner() {
+  const [activeIndex, setActiveIndex] = useState(0);
   return (
     <section className="booknook-hero w-full">
       <Swiper
         modules={[Autoplay, Pagination, Navigation]}
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         slidesPerView={1}
         initialSlide={0}
         loop
@@ -69,41 +74,69 @@ export default function Banner() {
                     BookNook
                   </p>
 
-                  <h1 className="max-w-2xl font-[var(--font-playfair)] text-[32px] font-bold leading-[1.2] tracking-normal text-[#F8F5EE] sm:text-4xl md:text-[44px] lg:text-5xl">
-                    {index === 0 ? (
-                      <>
-                        Your neighbourhood
-                        <br />
-                        <em className="font-normal text-[#B9DCCB]">
-                          library, online.
-                        </em>
-                      </>
-                    ) : index === 1 ? (
-                      <>
-                        Share the books
-                        <br />
-                        <em className="font-normal text-[#B9DCCB]">
-                          on your shelf.
-                        </em>
-                      </>
-                    ) : (
-                      <>
-                        Borrow. Read.
-                        <br />
-                        <em className="font-normal text-[#B9DCCB]">
-                          Return. Repeat.
-                        </em>
-                      </>
-                    )}
-                  </h1>
+<motion.h1
+  key={`${index}-${activeIndex}`}
+  initial={{
+    opacity: 0,
+    y: 35,
+    scale: 0.97,
+    filter: "blur(5px)",
+  }}
+  animate={
+    activeIndex === index
+      ? {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: "blur(0px)",
+        }
+      : {
+          opacity: 0,
+          y: 35,
+          scale: 0.97,
+          filter: "blur(5px)",
+        }
+  }
+transition={{
+  duration: 1,
+  ease: [0.22, 1, 0.36, 1],
+}}
+  className="max-w-2xl font-[var(--font-playfair)] text-[32px] font-bold leading-[1.2] tracking-normal text-[#F8F5EE] sm:text-4xl md:text-[44px] lg:text-5xl"
+>
+  {index === 0 ? (
+    <>
+      Your neighbourhood
+      <br />
+      <em className="font-normal text-[#B9DCCB]">
+        library, online.
+      </em>
+    </>
+  ) : index === 1 ? (
+    <>
+      Share the books
+      <br />
+      <em className="font-normal text-[#B9DCCB]">
+        on your shelf.
+      </em>
+    </>
+  ) : (
+    <>
+      Borrow. Read.
+      <br />
+      <em className="font-normal text-[#B9DCCB]">
+        Return. Repeat.
+      </em>
+    </>
+  )}
+</motion.h1>
 
-                  <p className="mt-5 max-w-xl text-[11px] leading-6 text-[#E5E8E1]/90 sm:text-xs sm:leading-7">
+<p className="mt-5 max-w-xl text-xs leading-6 text-[#E5E8E1]/90 sm:text-sm sm:leading-7">
                     {slide.description}
                   </p>
 
                   <Link
                     href="/books"
-                    className="mt-7 inline-flex items-center rounded-full bg-[#B9DCCB] px-4 py-2 text-[11px] font-semibold tracking-wide text-[#0C1C15] shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#E7F1EA] sm:text-xs"
+                   className="btn btn-sm mt-7 h-auto min-h-0 rounded-full border-0 bg-[#B9DCCB] px-4 py-2 text-[11px] font-semibold tracking-wide text-[#0C1C15] shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#E7F1EA] sm:text-xs"
                   >
                     Browse Books
                   </Link>

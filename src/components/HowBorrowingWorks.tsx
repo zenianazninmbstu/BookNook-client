@@ -1,4 +1,8 @@
+
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const steps = [
   {
@@ -58,10 +62,34 @@ const perks = [
   { value: "500+", label: "Books on the shelf" },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut" as const,
+    },
+  },
+};
+
 export default function HowBorrowingWorks() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#0B1913] px-6 py-20 sm:px-10 md:py-24">
-      {/* Ambient glow decorations */}
+    <section className="relative w-full overflow-hidden bg-[#0B1913] px-4 py-20 sm:px-6 md:px-8 md:py-24">
+      {/* Ambient Decorations */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-24 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[#B9DCCB]/10 blur-[120px]"
@@ -71,111 +99,149 @@ export default function HowBorrowingWorks() {
         className="pointer-events-none absolute -bottom-32 -left-24 h-[320px] w-[320px] rounded-full bg-[#C6A58A]/10 blur-[110px]"
       />
 
-      <div className="relative mx-auto max-w-6xl">
+      <div className="relative z-10 mx-auto max-w-6xl">
         {/* Section Header */}
-        <div className="mx-auto max-w-2xl text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.8 }}
+          className="mx-auto max-w-2xl text-center"
+        >
           <div className="flex items-center justify-center gap-3">
             <span className="h-px w-8 bg-gradient-to-r from-transparent to-[#B9DCCB]/60" />
-            <p className="font-[var(--font-playfair)] text-[10px] font-semibold uppercase tracking-[0.28em] text-[#C6A58A] sm:text-xs">
+            <span className="badge badge-outline border-[#C6A58A]/50 px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#C6A58A]">
               A Four Step Journey
-            </p>
+            </span>
             <span className="h-px w-8 bg-gradient-to-l from-transparent to-[#B9DCCB]/60" />
           </div>
 
-          <h2 className="mt-4 font-[var(--font-playfair)] text-[26px] font-bold leading-tight sm:text-4xl md:text-[42px]">
+          <h2 className="mt-5 font-[var(--font-playfair)] text-3xl font-bold leading-tight sm:text-4xl md:text-[42px]">
             <span className="bg-gradient-to-r from-[#F8F5EE] via-[#B9DCCB] to-[#C6A58A] bg-clip-text text-transparent">
               How Borrowing Works
             </span>
           </h2>
 
-          <p className="mx-auto mt-4 max-w-lg text-xs leading-6 text-[#AAB9AD] sm:text-[13px]">
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-7 text-[#AAB9AD]">
             From joining to your first page — four small steps, zero hassle.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Steps */}
-        <div className="relative mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Step Cards */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="relative mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {steps.map((item, index) => (
-            <div
+            <motion.div
               key={item.step}
-              className="group relative overflow-hidden rounded-2xl border border-[#B9DCCB]/15 bg-gradient-to-b from-[#0F211A] to-[#0A1712] p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#B9DCCB]/50 hover:shadow-[0_18px_40px_-18px_rgba(185,220,203,0.45)]"
+              variants={cardVariants}
+              className="card group relative overflow-hidden border border-[#B9DCCB]/20 bg-gradient-to-b from-[#142B20] to-[#091710] shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-[#B9DCCB]/60 hover:shadow-[0_18px_40px_-18px_rgba(185,220,203,0.45)]"
             >
-              {/* Top accent line */}
-              <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#B9DCCB]/50 to-transparent" />
+              <div className="card-body relative gap-0 p-6">
+                {/* Accent */}
+                <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#B9DCCB]/70 to-transparent" />
 
-              {/* Ghost number */}
-              <span className="pointer-events-none absolute -right-2 -top-3 font-[var(--font-playfair)] text-[64px] font-bold leading-none text-[#B9DCCB]/[0.07] transition-colors duration-300 group-hover:text-[#B9DCCB]/[0.14]">
-                {item.step}
-              </span>
+                {/* Background Number */}
+                <span className="pointer-events-none absolute -right-2 -top-3 font-[var(--font-playfair)] text-7xl font-bold leading-none text-[#B9DCCB]/[0.07] transition-colors duration-300 group-hover:text-[#B9DCCB]/[0.15]">
+                  {item.step}
+                </span>
 
-              {/* Icon tile */}
-              <div className="relative flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#B9DCCB] to-[#7FB99C] text-[#0C1C15] shadow-[0_10px_25px_-12px_rgba(185,220,203,0.9)] transition-transform duration-300 group-hover:scale-105 [&>svg]:h-7 [&>svg]:w-7">
-                {item.icon}
+                {/* Icon */}
+                <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#B9DCCB] to-[#7FB99C] text-[#0C1C15] shadow-lg transition-transform duration-300 group-hover:scale-110 [&>svg]:h-7 [&>svg]:w-7">
+                  {item.icon}
+                </div>
+
+                <div className="mt-6">
+                  <span className="badge badge-sm border-0 bg-[#B9DCCB]/10 text-[#B9DCCB]">
+                    STEP {item.step}
+                  </span>
+
+                  <h3 className="mt-3 font-[var(--font-playfair)] text-lg font-bold text-[#F5F1E8]">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-3 text-xs leading-6 text-[#AAB9AD]">
+                    {item.description}
+                  </p>
+                </div>
+
+                {/* Bottom Accent */}
+                <div className="mt-6 h-[2px] w-10 rounded-full bg-[#B9DCCB]/40 transition-all duration-300 group-hover:w-full group-hover:bg-[#B9DCCB]/80" />
               </div>
 
-              {/* Step label */}
-              <p className="mt-5 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#B9DCCB]/80">
-                Step {item.step}
-              </p>
-
-              <h3 className="mt-2 font-[var(--font-playfair)] text-lg font-semibold text-[#F5F1E8]">
-                {item.title}
-              </h3>
-
-              <p className="mt-2.5 text-xs leading-6 text-[#AAB9AD]">
-                {item.description}
-              </p>
-
-              {/* Connector arrow (desktop) */}
+              {/* Desktop Connector */}
               {index < steps.length - 1 && (
                 <span
                   aria-hidden="true"
-                  className="absolute -right-[15px] top-1/2 z-10 hidden h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border border-[#B9DCCB]/25 bg-[#0C1C15] text-[#B9DCCB] lg:flex"
+                  className="absolute -right-3 top-1/2 z-20 hidden h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border border-[#B9DCCB]/30 bg-[#0B1913] text-[#B9DCCB] lg:flex"
                 >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-3.5 w-3.5">
-                    <path d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
+                  →
                 </span>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Trust stats */}
-        <div className="mt-12 grid grid-cols-1 overflow-hidden rounded-2xl border border-[#B9DCCB]/15 bg-[#0C1C15]/70 sm:grid-cols-3">
-          {perks.map((perk, index) => (
-            <div
-              key={perk.value}
-              className={`px-6 py-6 text-center ${
-                index > 0 ? "border-t border-[#B9DCCB]/12 sm:border-l sm:border-t-0" : ""
-              }`}
-            >
-              <p className="font-[var(--font-playfair)] text-2xl font-bold text-[#B9DCCB] sm:text-3xl">
-                {perk.value}
-              </p>
-              <p className="mt-1.5 text-[11px] uppercase tracking-[0.14em] text-[#91A397]">
-                {perk.label}
-              </p>
-            </div>
-          ))}
-        </div>
+{/* Trust Stats */}
+<motion.div
+  initial={{ opacity: 0, y: 25 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{ duration: 0.7 }}
+  className="stats stats-vertical mt-12 w-full overflow-hidden border border-[#B9DCCB]/20 bg-[#10251A]/80 shadow-xl sm:stats-horizontal"
+>
+  {perks.map((perk, index) => (
+    <motion.div
+      key={perk.value}
+      animate={{ y: [0, -5, 0] }}
+      transition={{
+        duration: 2.5,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay: index * 0.3,
+      }}
+      className={`stat place-items-center text-center ${
+        index > 0
+          ? "border-t border-[#B9DCCB]/15 sm:border-l sm:border-t-0"
+          : ""
+      }`}
+    >
+      <div className="stat-value font-[var(--font-playfair)] text-2xl text-[#B9DCCB] sm:text-3xl">
+        {perk.value}
+      </div>
 
-        {/* CTA */}
-        <div className="mt-12 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+      <div className="stat-desc mt-2 text-[10px] uppercase tracking-[0.14em] text-[#AAB9AD]">
+        {perk.label}
+      </div>
+    </motion.div>
+  ))}
+</motion.div>
+        {/* Call To Action */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7 }}
+          className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
+        >
           <Link
             href="/register"
-            className="inline-flex items-center gap-2 rounded-full bg-[#B9DCCB] px-8 py-3 text-xs font-semibold tracking-wide text-[#0C1C15] shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#E7F1EA] sm:text-sm"
+            className="btn btn-sm min-h-0 rounded-full border-0 bg-[#B9DCCB] px-7 py-3 text-xs font-semibold text-[#0C1C15] shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#E7F1EA] sm:btn-md"
           >
-            Start Borrowing — It&apos;s Free
+            Start Borrowing — It&apos;s Free <span aria-hidden="true">→</span>
           </Link>
 
           <Link
             href="/books"
-            className="inline-flex items-center gap-2 rounded-full border border-[#B9DCCB]/40 px-8 py-3 text-xs font-semibold tracking-wide text-[#B9DCCB] transition-all duration-300 hover:border-[#B9DCCB] hover:bg-[#B9DCCB]/10 sm:text-sm"
+            className="btn btn-sm min-h-0 rounded-full border border-[#B9DCCB]/40 bg-transparent px-7 py-3 text-xs font-semibold text-[#B9DCCB] transition-all duration-300 hover:-translate-y-1 hover:border-[#B9DCCB] hover:bg-[#B9DCCB]/10 sm:btn-md"
           >
             Browse The Shelf
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
