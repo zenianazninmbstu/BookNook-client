@@ -91,8 +91,11 @@ export default function RegisterPage() {
               Full Name
             </label>
             <input
-              type="text"
-              value={name}
+             
+  type="text"
+  id="name"
+  name="name"
+  value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your name"
               required
@@ -106,6 +109,8 @@ export default function RegisterPage() {
             </label>
             <input
               type="email"
+              id="email"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
@@ -120,6 +125,8 @@ export default function RegisterPage() {
             </label>
             <input
               type="url"
+              id="image"
+              name="image"
               value={image}
               onChange={(e) => setImage(e.target.value)}
               placeholder="Enter your photo URL (optional)"
@@ -133,6 +140,8 @@ export default function RegisterPage() {
             </label>
             <input
               type="password"
+              id="password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Create a password"

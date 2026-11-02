@@ -54,7 +54,7 @@ const steps = [
 
 const perks = [
   { value: "Free", label: "Membership, forever" },
-  { value: "14 days", label: "Standard loan period" },
+  { value: "7 days", label: "Standard loan period" },
   { value: "500+", label: "Books on the shelf" },
 ];
 

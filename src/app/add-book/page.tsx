@@ -200,6 +200,8 @@ showToast("Image uploaded successfully!");
             </label>
             <input
               required
+              id="title"
+              name="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter book title"
@@ -213,6 +215,8 @@ showToast("Image uploaded successfully!");
             </label>
             <input
               required
+              id="author"
+               name="author"
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
               placeholder="Enter author name"
@@ -225,6 +229,8 @@ showToast("Image uploaded successfully!");
               Category
             </label>
             <select
+            id="category"
+             name="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               className="w-full rounded-lg border border-[#E6E0D5] bg-[#FDFCFA] px-4 py-3 text-sm outline-none focus:border-[#42634F]"
@@ -244,6 +250,8 @@ showToast("Image uploaded successfully!");
             <input
               required
               type="file"
+              id="bookImage"
+              name="bookImage"
               accept="image/*"
               onChange={handleImageUpload}
               disabled={uploading}
@@ -277,6 +285,8 @@ showToast("Image uploaded successfully!");
             <textarea
               required
               rows={4}
+              id="description"
+             name="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Write a short description about the book..."
@@ -292,6 +302,8 @@ showToast("Image uploaded successfully!");
               required
               type="number"
               min="1"
+              id="totalCopies"
+              name="totalCopies"
               value={totalCopies}
               onChange={(e) => setTotalCopies(Number(e.target.value))}
               className="w-full rounded-lg border border-[#E6E0D5] bg-[#FDFCFA] px-4 py-3 text-sm outline-none focus:border-[#42634F]"
@@ -304,6 +316,8 @@ showToast("Image uploaded successfully!");
             </label>
             <input
               readOnly
+              id="userName"
+              name="userName"
               value={session.user.name ?? ""}
               className="w-full rounded-lg border border-[#E6E0D5] bg-gray-100 px-4 py-3 text-sm text-[#718076]"
             />
@@ -315,6 +329,8 @@ showToast("Image uploaded successfully!");
             </label>
             <input
               readOnly
+              id="userEmail"
+              name="userEmail"
               value={session.user.email ?? ""}
               className="w-full rounded-lg border border-[#E6E0D5] bg-gray-100 px-4 py-3 text-sm text-[#718076]"
             />

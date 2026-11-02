@@ -79,8 +79,11 @@ export default function LoginPage() {
               Email
             </label>
             <input
-              type="email"
-              value={email}
+              
+  type="email"
+  id="email"
+  name="email"
+  value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
@@ -93,8 +96,10 @@ export default function LoginPage() {
               Password
             </label>
             <input
-              type="password"
-              value={password}
+  type="password"
+  id="password"
+  name="password"
+  value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               required

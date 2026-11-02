@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 interface BorrowButtonProps {
   bookId: string;
@@ -62,12 +63,12 @@ export default function BorrowButton({
 
       const result = await response.json();
 
-      if (!response.ok) {
-        setMessage(result.message || "Unable to borrow this book.");
-        return;
-      }
+     if (!response.ok) {
+  toast.error(result.message || "Unable to borrow this book.");
+  return;
+}
 
-      setMessage("Book borrowed successfully!");
+     toast.success("Book borrowed successfully!");
       setIsOpen(false);
       router.refresh();
     } catch (error) {
