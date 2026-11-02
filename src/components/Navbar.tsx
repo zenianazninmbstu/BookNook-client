@@ -26,6 +26,7 @@ export default function Navbar() {
 
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
+  
   const isLoggedIn = !!user;
 
   const navLinks = isLoggedIn

@@ -90,7 +90,7 @@ export default function BorrowButton({
           disabled={totalCopies <= 0}
           className="w-full rounded-lg bg-[#0C1C15] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#294B38] disabled:cursor-not-allowed disabled:bg-gray-400"
         >
-          {totalCopies <= 0 ? "Not Available" : "Borrow This Book"}
+          {totalCopies <= 0 ? "Currently Unavailable" : "Borrow This Book"}
         </button>
 
         {message && (
