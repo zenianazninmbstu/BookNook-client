@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${dmSans.variable}`}>
       <body className="min-h-screen flex flex-col font-[var(--font-dm-sans)]">
         <Navbar />
         {children}

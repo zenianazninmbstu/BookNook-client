@@ -1,9 +1,8 @@
-
 "use client";
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 
 const publicLinks = [
@@ -23,6 +22,25 @@ export default function Navbar() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+useEffect(() => {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark" || savedTheme === "light") {
+    setTheme(savedTheme);
+    document.documentElement.classList.toggle("dark", savedTheme === "dark");
+  }
+}, []);
+
+const toggleTheme = () => {
+  const newTheme = theme === "light" ? "dark" : "light";
+
+  setTheme(newTheme);
+  localStorage.setItem("theme", newTheme);
+  document.documentElement.classList.toggle("dark", newTheme === "dark");
+};
 
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
@@ -90,19 +108,31 @@ export default function Navbar() {
 
         {/* Right Side */}
         <div className="hidden items-center gap-3 lg:flex">
-          <span title="Theme" className="text-[#B9DCCB]/75">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-5 w-5">
-              <circle cx="12" cy="12" r="4" />
-              <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
-            </svg>
-          </span>
+         <button
+  type="button"
+  onClick={toggleTheme}
+  title={theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+  aria-label="Toggle theme"
+ className="btn btn-ghost btn-circle h-9 min-h-9 w-9 text-[#B9DCCB] hover:bg-[#B9DCCB]/15"
+>
+  {theme === "light" ? (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+      <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z" />
+    </svg>
+  ) : (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+    </svg>
+  )}
+</button>
 
           <div className="mx-1 h-6 w-px bg-white/15" />
 
           {isPending ? (
             <div className="h-9 w-9 animate-pulse rounded-full bg-white/10" />
           ) : isLoggedIn ? (
-            <div className="relative">
+           <div className="dropdown dropdown-end">
               <button
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
                 aria-label="Open profile menu"
@@ -120,45 +150,50 @@ export default function Navbar() {
                     {user.name?.charAt(0)?.toUpperCase() || "U"}
                   </div>
                 )}
-                <span className="max-w-24 truncate text-xs text-[#F5F1E8]">
-                  {user.name}
-                </span>
+                
                 <span className="text-xs text-[#B9DCCB]">⌄</span>
               </button>
 
               {isProfileOpen && (
-                <div className="absolute right-0 top-12 z-50 w-48 rounded-xl border border-[#B9DCCB]/20 bg-[#10231A] p-2 shadow-xl">
-                  <p className="truncate px-3 py-2 text-xs text-[#B9DCCB]">
-                    {user.email}
-                  </p>
-                  <div className="my-1 border-t border-white/10" />
-                  <Link
-                    href="/profile"
-                    onClick={() => setIsProfileOpen(false)}
-                    className="block rounded-lg px-3 py-2 text-sm text-white hover:bg-white/10"
-                  >
-                    My Profile
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full rounded-lg px-3 py-2 text-left text-sm text-red-300 hover:bg-red-400/10"
-                  >
-                    Logout
-                  </button>
-                </div>
+                <ul className="dropdown-content menu z-50 mt-3 w-48 rounded-xl border border-[#B9DCCB]/20 bg-[#10231A] p-2 shadow-xl">
+  <li>
+    <span className="text-sm font-semibold text-white">
+      {user.name}
+    </span>
+  </li>
+
+  <li>
+    <Link
+      href="/profile"
+      onClick={() => setIsProfileOpen(false)}
+      className="text-sm text-white"
+    >
+      My Profile
+    </Link>
+  </li>
+
+  <li>
+    <button
+      onClick={handleLogout}
+      className="text-sm text-red-300"
+    >
+      Logout
+    </button>
+  </li>
+</ul>
               )}
             </div>
           ) : (
             <>
               <Link
                 href="/login"
-                className="rounded-full border border-[#B9DCCB]/50 px-4 py-2 text-[11px] font-medium tracking-wide text-[#F5F1E8] transition hover:border-[#B9DCCB] hover:bg-[#B9DCCB]/10 sm:text-xs"
+               className="btn btn-sm rounded-full border-0 bg-[#B9DCCB] px-4 text-[11px] font-semibold tracking-wide text-[#15392D] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#D3E9DA] hover:shadow-md sm:text-xs"
               >
                 Login
               </Link>
               <Link
                 href="/register"
-                className="rounded-full bg-[#B9DCCB] px-4 py-2 text-[11px] font-semibold tracking-wide text-[#15392D] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#D3E9DA] hover:shadow-md sm:text-xs"
+                className="btn btn-sm rounded-full border-0 bg-[#B9DCCB] px-4 text-[11px] font-semibold tracking-wide text-[#15392D] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#D3E9DA] hover:shadow-md sm:text-xs"
               >
                 Register
               </Link>

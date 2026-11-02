@@ -62,7 +62,7 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="w-fit text-xs tracking-wide text-[#AAB9AD] transition duration-300 hover:translate-x-1 hover:text-[#B9DCCB]"
+                className="link link-hover w-fit text-xs tracking-wide text-[#AAB9AD] no-underline transition duration-300 hover:translate-x-1 hover:text-[#B9DCCB]"
               >
                 {link.name}
               </Link>
@@ -118,7 +118,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
               aria-label="Facebook"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-[#C7D5C9] transition duration-300 hover:-translate-y-1 hover:border-[#B9DCCB] hover:bg-[#B9DCCB] hover:text-[#123629]"
+             className="btn btn-ghost btn-circle h-9 min-h-9 w-9 rounded-full border border-white/15 p-0 text-[#C7D5C9] transition duration-300 hover:-translate-y-1 hover:border-[#B9DCCB] hover:bg-[#B9DCCB] hover:text-[#123629]"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
                 <path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3h2.8v8h3.4Z" />
@@ -131,7 +131,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-[#C7D5C9] transition duration-300 hover:-translate-y-1 hover:border-[#B9DCCB] hover:bg-[#B9DCCB] hover:text-[#123629]"
+              className="btn btn-ghost btn-circle h-9 min-h-9 w-9 rounded-full border border-white/15 p-0 text-[#C7D5C9] transition duration-300 hover:-translate-y-1 hover:border-[#B9DCCB] hover:bg-[#B9DCCB] hover:text-[#123629]"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-4 w-4">
                 <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -146,7 +146,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-[#C7D5C9] transition duration-300 hover:-translate-y-1 hover:border-[#B9DCCB] hover:bg-[#B9DCCB] hover:text-[#123629]"
+              className="btn btn-ghost btn-circle h-9 min-h-9 w-9 rounded-full border border-white/15 p-0 text-[#C7D5C9] transition duration-300 hover:-translate-y-1 hover:border-[#B9DCCB] hover:bg-[#B9DCCB] hover:text-[#123629]"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
                 <path d="M5.2 3.5a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6ZM3.6 8.5h3.2V20H3.6V8.5Zm5.3 0H12v1.6h.1a3.5 3.5 0 0 1 3.2-1.8c3.4 0 4 2.2 4 5.1V20h-3.2v-5.8c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V20H8.9V8.5Z" />

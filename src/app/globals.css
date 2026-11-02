@@ -1,8 +1,23 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --background: #F8F5EE;
+  --foreground: #0C1C15;
+  --surface: #FFFFFF;
+  --text-muted: #64756B;
+  --border: #DCE5DD;
+}
+
+:root.dark {
+  color-scheme: dark;
+  --background: #0C1C15;
+  --foreground: #F5F1E8;
+  --surface: #10231A;
+  --text-muted: #B6C4B8;
+  --border: #315442;
 }
 
 @theme inline {
@@ -12,19 +27,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 
 /* BookNook Hero Slider */
