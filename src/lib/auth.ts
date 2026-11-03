@@ -10,6 +10,10 @@ const client = new MongoClient(process.env.MONGODB_URI!);
 const db = client.db("booknook");
 
 export const auth = betterAuth({
+    trustedOrigins: [
+    "http://localhost:3000",
+    "https://book-nook-client-iota.vercel.app",
+  ],
   database: mongodbAdapter(db, {
     client,
   }),
