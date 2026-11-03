@@ -14,6 +14,7 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -46,18 +47,20 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = async () => {
-    setError("");
+  setError("");
 
-    try {
-      await authClient.signIn.social({
-        provider: "google",
-        callbackURL: "/",
-      });
-    } catch {
-      setError("Google login failed. Please try again.");
-    }
-  };
+  const redirect =
+    new URLSearchParams(window.location.search).get("redirect") || "/";
 
+  try {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: redirect,
+    });
+  } catch {
+    setError("Google login failed. Please try again.");
+  }
+};
   return (
     <main className="flex min-h-[75vh] items-center justify-center bg-[#F8F5EE] px-4 py-16">
       <div className="w-full max-w-md rounded-2xl border border-[#DCE5DD] bg-white p-8 shadow-sm">
@@ -87,25 +90,52 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#557563]"
+              className="input input-bordered h-auto min-h-0 w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-[#263B30] focus:border-[#557563] focus:outline-none"
             />
           </div>
 
-          <div>
-            <label className="mb-2 block text-sm font-medium text-[#263B30]">
-              Password
-            </label>
-            <input
-  type="password"
-  id="password"
-  name="password"
-  value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#557563]"
-            />
-          </div>
+<div>
+  <label
+    htmlFor="password"
+    className="mb-2 block text-sm font-medium text-[#263B30]"
+  >
+    Password
+  </label>
+
+  <div className="relative">
+    <input
+      type={showPassword ? "text" : "password"}
+      id="password"
+      name="password"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      placeholder="Enter your password"
+      required
+      className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 pr-12 text-[#263B30] outline-none focus:border-[#557563]"
+    />
+
+    <button
+      type="button"
+      onClick={() => setShowPassword((prev) => !prev)}
+      className="absolute right-3 top-1/2 -translate-y-1/2 border-0 bg-transparent p-1 text-[#557563] hover:text-[#0C1C15]"
+      aria-label={showPassword ? "Hide password" : "Show password"}
+    >
+      {showPassword ? (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+          <path d="M3 3l18 18" />
+          <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+          <path d="M9.9 5.2A10.9 10.9 0 0 1 12 5c5 0 9 5 9 7a9.8 9.8 0 0 1-2.1 3.3" />
+          <path d="M6.2 6.2C3.8 7.8 2 10.2 2 12c0 2 4 7 10 7 1.4 0 2.7-.3 3.8-.8" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+          <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      )}
+    </button>
+  </div>
+</div>
 
           <div className="text-right">
             <button
@@ -125,7 +155,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-[#0C1C15] py-3 font-medium text-white transition hover:bg-[#244735] disabled:opacity-60"
+            className="btn w-full rounded-lg border-0 bg-[#0C1C15] py-3 font-medium text-white transition hover:bg-[#244735] disabled:opacity-60"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
