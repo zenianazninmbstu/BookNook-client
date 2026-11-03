@@ -153,9 +153,29 @@ export default function Footer() {
               </svg>
             </a>
 
+            
+                  {/* X (Twitter) */}
+            <a
+              href="https://x.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (Twitter)"
+              className="btn btn-ghost btn-circle h-9 min-h-9 w-9 rounded-full border border-white/15 p-0 text-[#C7D5C9] transition duration-300 hover:-translate-y-1 hover:border-[#B9DCCB] hover:bg-[#B9DCCB] hover:text-[#123629]"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-4 w-4"
+                aria-hidden="true"
+              >
+                <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-7.3L5.7 22H2.5l7.3-8.4L1.8 2h6.5l4.4 6.8L18.9 2Zm-1.1 18h1.7L7.3 3.9H5.5L17.8 20Z" />
+              </svg>
+            </a>
+
           </div>
         </div>
       </div>
+
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">

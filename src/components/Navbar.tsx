@@ -235,25 +235,62 @@ const toggleTheme = () => {
           <div className="mx-auto mt-4 max-w-6xl border-t border-white/10 pt-4">
             {isPending ? (
               <p className="text-center text-xs text-white/50">Loading...</p>
-            ) : isLoggedIn ? (
-              <div className="flex items-center gap-3">
-                {user.image ? (
-                  <img src={user.image} alt={user.name || "User"} className="h-10 w-10 rounded-full object-cover" />
-                ) : (
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#B9DCCB] text-[#15392D]">
-                    {user.name?.charAt(0)?.toUpperCase() || "U"}
-                  </div>
-                )}
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm text-white">{user.name}</p>
-                  <Link href="/profile" onClick={() => setIsOpen(false)} className="text-xs text-[#B9DCCB]">
-                    My Profile
-                  </Link>
-                </div>
-                <button onClick={handleLogout} className="rounded-full border border-red-300/40 px-3 py-2 text-xs text-red-200">
-                  Logout
-                </button>
-              </div>
+          ) : isLoggedIn ? (
+  <div className="relative flex justify-end">
+    <button
+      type="button"
+      onClick={() => setIsProfileOpen(!isProfileOpen)}
+      aria-label="Open profile menu"
+      aria-expanded={isProfileOpen}
+      className="flex items-center gap-2 rounded-full border border-[#B9DCCB]/40 p-1 pr-3 transition hover:bg-white/10"
+    >
+      {user.image ? (
+        <img
+          src={user.image}
+          alt={user.name || "User"}
+          className="h-10 w-10 rounded-full object-cover"
+        />
+      ) : (
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#B9DCCB] font-semibold text-[#15392D]">
+          {user.name?.charAt(0)?.toUpperCase() || "U"}
+        </div>
+      )}
+
+      <span className="text-xs text-[#B9DCCB]">⌄</span>
+    </button>
+
+    {isProfileOpen && (
+      <ul className="absolute right-0 top-full z-50 mt-3 w-48 rounded-xl border border-[#B9DCCB]/20 bg-[#10231A] p-2 shadow-xl">
+        <li>
+          <span className="text-sm font-semibold text-white">
+            {user.name}
+          </span>
+        </li>
+
+        <li>
+          <Link
+            href="/profile"
+            onClick={() => {
+              setIsProfileOpen(false);
+              setIsOpen(false);
+            }}
+            className="text-sm text-white"
+          >
+            My Profile
+          </Link>
+        </li>
+
+        <li>
+          <button
+            onClick={handleLogout}
+            className="text-sm text-red-300"
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
+    )}
+  </div>
             ) : (
               <div className="flex gap-3">
                 <Link href="/login" onClick={() => setIsOpen(false)} className="flex-1 rounded-full border border-[#B9DCCB]/50 py-2 text-center text-xs font-medium text-white">

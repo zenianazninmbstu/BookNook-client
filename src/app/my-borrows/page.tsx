@@ -116,7 +116,7 @@ export default function MyBorrowsPage() {
   if (isPending || loading) {
     return (
       <main className="flex min-h-[60vh] items-center justify-center bg-[#F8F5EE]">
-        <p className="text-[#42634F]">Loading your borrowed books...</p>
+       <span className="loading loading-spinner loading-md text-[#42634F]"></span>
       </main>
     );
   }
@@ -153,7 +153,7 @@ export default function MyBorrowsPage() {
           </div>
         ) : (
           <div className="mt-10 overflow-x-auto rounded-2xl border border-[#E6E0D5] bg-white">
-            <table className="w-full min-w-[750px] text-left">
+          <table className="table w-full min-w-[750px] text-left [&_tbody_tr:not(:last-child)_td]:border-b [&_tbody_tr:not(:last-child)_td]:border-[#EEEAE1]">
               <thead className="bg-[#EAF1EB] text-xs uppercase tracking-wider text-[#42634F]">
                 <tr>
                   <th className="px-6 py-5">Book</th>
@@ -163,9 +163,9 @@ export default function MyBorrowsPage() {
                 </tr>
               </thead>
 
-              <tbody>
-                {borrows.map((borrow) => (
-                  <tr key={borrow._id} className="border-t border-[#EEEAE1]">
+            <tbody>
+                 {borrows.map((borrow) => (
+                  <tr key={borrow._id}>
                     <td className="px-6 py-5">
                       <div className="flex items-center gap-4">
                         {borrow.bookImage ? (
@@ -201,7 +201,7 @@ export default function MyBorrowsPage() {
                       <button
                         onClick={() => handleReturn(borrow._id)}
                         disabled={returningId === borrow._id}
-                        className="rounded-lg bg-[#0C1C15] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#294B38] disabled:bg-gray-400"
+                        className="btn btn-sm rounded-lg border-0 bg-[#0C1C15] px-4 text-xs font-semibold text-white hover:bg-[#294B38] disabled:bg-gray-400"
                       >
                         {returningId === borrow._id
                           ? "Returning..."

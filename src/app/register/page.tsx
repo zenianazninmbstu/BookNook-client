@@ -16,6 +16,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -138,16 +139,37 @@ export default function RegisterPage() {
             <label className="mb-2 block text-sm font-medium text-[#263B30]">
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Create a password"
-              required
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#557563]"
-            />
+          <div className="relative">
+  <input
+    type={showPassword ? "text" : "password"}
+    id="password"
+    name="password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    placeholder="Create a password"
+    required
+    className="w-full rounded-lg border border-gray-300 px-4 py-3 pr-12 outline-none focus:border-[#557563]"
+  />
+
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    aria-label={showPassword ? "Hide password" : "Show password"}
+    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#557563]"
+  >
+    {showPassword ? (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+        <path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+        <path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c5 0 9 5 9 7a9.8 9.8 0 0 1-3.2 4.2M6.2 6.2C3.5 8 3 11 3 12c0 2 4 7 9 7 1.2 0 2.3-.3 3.3-.8" />
+      </svg>
+    ) : (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+        <path d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7Z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    )}
+  </button>
+</div>
 
             <ul className="mt-2 space-y-1 text-xs text-gray-500">
               <li className={hasUppercase ? "text-green-700" : ""}>

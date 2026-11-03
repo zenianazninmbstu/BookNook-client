@@ -194,7 +194,11 @@ export default function ReaderReviews() {
             <motion.figure
               key={review.name}
               variants={cardVariants}
-              className="card group relative overflow-hidden border border-[#B9DCCB]/20 bg-gradient-to-b from-[#142B20] to-[#091710] shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-[#B9DCCB]/60 hover:shadow-[0_18px_40px_-18px_rgba(185,220,203,0.45)]"
+              className={`card group relative overflow-hidden border border-[#B9DCCB]/20 bg-gradient-to-b from-[#142B20] to-[#091710] shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-[#B9DCCB]/60 hover:shadow-[0_18px_40px_-18px_rgba(185,220,203,0.45)] ${
+  review.name === "Sadia Rahman"
+    ? "sm:col-span-2 sm:mx-auto sm:w-1/2 lg:col-span-1 lg:mx-0 lg:w-full"
+    : ""
+}`}
             >
               <div className="card-body relative gap-0 p-6">
                 {/* Top Accent */}
