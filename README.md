@@ -2,7 +2,7 @@
 
 BookNook is a small online library platform where users can discover books, manage their own book collections, and borrow books easily.
 
-🔗 Live Website: https://live-site-url.vercel.app
+🔗 Live Website: https://book-nook-client-iota.vercel.app/
 
 ✨ Features
 
