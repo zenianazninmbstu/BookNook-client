@@ -3,9 +3,9 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div className="flex min-h-[70vh] flex-col items-center justify-center bg-[#F8F5EE] px-4 text-center">
-      <h1 className="text-8xl font-bold text-[#0C1C15]">404</h1>
+      <h1 className="font-[var(--font-playfair)] text-8xl font-bold text-[#0C1C15]">404</h1>
 
-      <h2 className="mt-4 text-2xl font-semibold text-[#0C1C15]">
+      <h2 className="mt-4 font-[var(--font-playfair)] text-2xl font-semibold text-[#0C1C15]">
         Page Not Found
       </h2>
 

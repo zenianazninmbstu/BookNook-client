@@ -1,6 +1,6 @@
 
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -17,8 +17,8 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -33,8 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${dmSans.variable}`}>
-      <body className="min-h-screen flex flex-col font-[var(--font-dm-sans)]">
+    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${inter.variable}`}>
+      <body className="min-h-screen flex flex-col font-[var(--font-inter)]">
         <Navbar />
         {children}
         <Footer />

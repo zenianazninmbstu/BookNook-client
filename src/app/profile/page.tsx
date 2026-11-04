@@ -29,7 +29,7 @@ export default function ProfilePage() {
   return (
     <main className="flex min-h-[75vh] items-center justify-center bg-[#F8F5EE] px-4 py-16">
       <div className="w-full max-w-lg rounded-2xl border border-[#DCE5DD] bg-white p-8 text-center shadow-sm">
-        <h1 className="mb-8 font-serif text-4xl text-[#0C1C15]">
+        <h1 className="mb-8 font-[var(--font-playfair)] text-4xl text-[#0C1C15]">
           My Profile
         </h1>
 

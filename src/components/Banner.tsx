@@ -130,7 +130,7 @@ transition={{
   )}
 </motion.h1>
 
-<p className="mt-5 max-w-xl text-xs leading-6 text-[#E5E8E1]/90 sm:text-sm sm:leading-7">
+<p className="mt-5 max-w-xl text-sm leading-6 text-[#E5E8E1]/90 sm:text-[15px] lg:text-base sm:leading-7">
                     {slide.description}
                   </p>
 

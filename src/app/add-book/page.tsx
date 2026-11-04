@@ -139,7 +139,7 @@ showToast("Image uploaded successfully!");
       setCategory("Fiction");
       setDescription("");
       setImage("");
-      setTotalCopies(1);
+      setTotalCopies(0);
 
       router.refresh();
     } catch (error) {

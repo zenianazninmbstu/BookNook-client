@@ -89,7 +89,7 @@ const toggleTheme = () => {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative py-2.5 font-[var(--font-dm-sans)] text-[12px] font-medium tracking-wide transition-colors duration-300 ${
+                className={`relative py-2.5 font-[var(--font-inter)] text-[12px] font-medium tracking-wide transition-colors duration-300 ${
                   isActive
                     ? "text-[#B9DCCB]"
                     : "text-[#E2E5DC]/90 hover:text-[#B9DCCB]"

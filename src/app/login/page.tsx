@@ -68,7 +68,7 @@ export default function LoginPage() {
           <p className="mb-2 text-sm font-medium tracking-[0.2em] text-[#557563]">
             WELCOME BACK
           </p>
-          <h1 className="font-serif text-4xl text-[#0C1C15]">
+          <h1 className="font-[var(--font-playfair)] text-4xl text-[#0C1C15]">
             Login to BookNook
           </h1>
           <p className="mt-3 text-sm text-gray-500">

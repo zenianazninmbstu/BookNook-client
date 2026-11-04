@@ -115,7 +115,7 @@ export default function NewArrivals() {
   New Arrivals
 </motion.h2>
 
-          <p className="mx-auto mt-4 max-w-xl font-[var(--font-playfair)] text-sm text-[#B9DCCB] sm:text-base md:text-lg">
+          <p className="mx-auto mt-4 max-w-xl text-sm text-[#B9DCCB] sm:text-base md:text-lg">
             The latest books added by our readers.
           </p>
 
