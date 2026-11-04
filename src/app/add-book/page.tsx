@@ -22,7 +22,7 @@ export default function AddBookPage() {
   const [category, setCategory] = useState("Fiction");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const [totalCopies, setTotalCopies] = useState(1);
+  const [totalCopies, setTotalCopies] = useState(0);
 
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -301,7 +301,7 @@ showToast("Image uploaded successfully!");
             <input
               required
               type="number"
-              min="1"
+              min="0"
               id="totalCopies"
               name="totalCopies"
               value={totalCopies}
