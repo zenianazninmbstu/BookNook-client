@@ -44,7 +44,7 @@ MongoDB
 
 1. Clone the Repository
 
-git clone CLIENT_GITHUB_REPOSITORY_URL
+git clone https://github.com/zenianazninmbstu/BookNook-client.git
 
 2. Navigate to the Project Directory
 
